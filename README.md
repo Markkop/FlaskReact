@@ -13,3 +13,8 @@ Run `export FLASK_APP=server/src`and `export FLASK_ENV=development` to set up Fl
 You may run `export FLASK_DEBUG=1` to enable auto reloading\
 To initialize the database as configured in `schema.sql`, run `flask init-db`\
 Start flask by running `flask run` or `python -m flask run` in case of virtualenv
+
+## References
+
+- [Building a Todo App with Flask in Python](https://stackabuse.com/building-a-todo-app-with-flask-in-python/)
+- [Flask's Tutorial](https://flask.palletsprojects.com/en/1.0.x/tutorial/)
