@@ -3,9 +3,10 @@
 # To Do: Deploy
 
 import os
-import helper
 import json
 from flask import Flask, request, Response
+from flask_cors import CORS
+import src.helper
 from . import db
 
 
@@ -16,6 +17,9 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
+
+    # CORS
+    CORS(app)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -44,7 +48,7 @@ def create_app(test_config=None):
         item = req_data['item']
 
         # Add item to the list
-        res_data = helper.add_to_list(item)
+        res_data = src.helper.add_to_list(item)
 
         # Return error if item not added
         if res_data is None:
@@ -60,7 +64,7 @@ def create_app(test_config=None):
     @app.route('/items/all')
     def get_all_items():
         # Get items from the helper
-        res_data = helper.get_all_items()
+        res_data = src.helper.get_all_items()
 
         # Return response
         response = Response(json.dumps(res_data), mimetype='application/json')
