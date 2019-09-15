@@ -1,6 +1,7 @@
 import React from "react";
 import useForm from "./useForm";
 import axios from "axios";
+import TaskCardLayout from "./TaskCardLayout";
 
 const TaskCreate = () => {
   const createTask = async () => {
@@ -17,21 +18,11 @@ const TaskCreate = () => {
   const { values, handleChange, handleSubmit } = useForm(createTask);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="title">Título</label>
-        <input type="text" id="title" onChange={handleChange}></input>
-      </div>
-      <div>
-        <label htmlFor="description">Descrição:</label>
-        <input type="text" id="description" onChange={handleChange}></input>
-      </div>
-      <div>
-        <label htmlFor="deadline">Até:</label>
-        <input type="date" id="deadline" onChange={handleChange}></input>
-      </div>
-      <button type="submit">Enviar</button>
-    </form>
+    <TaskCardLayout
+      handleClick={handleSubmit}
+      handleChange={handleChange}
+      buttonText={"Create new task"}
+    />
   );
 };
 

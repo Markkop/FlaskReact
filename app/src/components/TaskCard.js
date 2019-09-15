@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import TaskCardLayout from "./TaskCardLayout";
 
 // To Do: change backend's logic so it provides an object instead of an array
 // Is it possible with sqlite? Perhaps migrate to mongo?
@@ -42,17 +43,15 @@ const TaskCard = ({ task }) => {
   };
 
   return (
-    <div className="taskCard">
-      <p>TaskID: {id}</p>
-      <p>Title: {title}</p>
-      <p>Description: {description}</p>
-      <p>Deadline: {deadline}</p>
-      <p>CompletedAt:</p>
-      <p>{date.toString()}</p>
-      <button onClick={handleClick}>
-        {done ? "Mark as undone" : "Mark as done"}
-      </button>
-    </div>
+    <TaskCardLayout
+      id={id}
+      title={title}
+      description={description}
+      deadline={deadline}
+      completedAt={date.toString()}
+      handleClick={e => handleClick(e)}
+      buttonText={done ? "Mark as undone" : "Mark as done"}
+    />
   );
 };
 

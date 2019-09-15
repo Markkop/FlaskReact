@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TaskCard from "./TaskCard";
 import axios from "axios";
+import TaskCreate from "./TaskCreate";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -19,6 +20,7 @@ const TaskList = () => {
 
   return (
     <div className="taskList">
+      <TaskCreate />
       {tasks && tasks.map(task => <TaskCard key={task[0]} task={task} />)}
     </div>
   );
