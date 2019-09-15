@@ -10,6 +10,7 @@ from . import db
 
 
 def create_app(test_config=None):
+    """ create server's app """
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
@@ -35,13 +36,15 @@ def create_app(test_config=None):
 
     # a simple page that says hello
     @app.route('/hello')
-    def hello():
+    def _hello():
+        """ returns a Hello World String """
         return 'Hello, World!'
 
     db.init_app(app)
 
     @app.route('/items/new', methods=['POST'])
-    def add_item():
+    def _add_item():
+        """ add a new task item """
         # Get item from the POST body
         req_data = request.get_json()
         item = req_data['item']
@@ -61,7 +64,8 @@ def create_app(test_config=None):
         return response
 
     @app.route('/items/all')
-    def get_all_items():
+    def _get_all_items():
+        """ gets all task items """
         # Get items from the helper
         res_data = src.helper.get_all_items()
         # Return response
@@ -69,7 +73,8 @@ def create_app(test_config=None):
         return response
 
     @app.route('/item/update', methods=['PUT'])
-    def update_status():
+    def _update_status():
+        """ updates a item """
         # Get item from the POST body
         req_data = request.get_json()
         item = req_data['item']

@@ -1,3 +1,4 @@
+""" database python file """
 import sqlite3
 
 import click
@@ -10,6 +11,7 @@ COMPLETED = 'Completed'
 
 
 def get_db():
+    """ gets db """
     if 'db' not in g:
         g.db = sqlite3.connect(
             current_app.config['DATABASE'],
@@ -20,18 +22,22 @@ def get_db():
     return g.db
 
 
-def close_db(e=None):
-    db = g.pop('db', None)
+def close_db(error=None):
+    """ closes db """
+    database = g.pop('db', None)
 
-    if db is not None:
-        db.close()
+    if database is not None:
+        database.close()
+    if error is not None:
+        print error
 
 
 def init_db():
-    db = get_db()
+    """ initiates db """
+    database = get_db()
 
-    with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
+    with current_app.open_resource('schema.sql') as function:
+        database.executescript(function.read().decode('utf8'))
 
 
 @click.command('init-db')
@@ -43,5 +49,6 @@ def init_db_command():
 
 
 def init_app(app):
+    """ initiates db """
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)

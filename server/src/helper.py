@@ -26,7 +26,7 @@ def add_to_list(item):
         # We commit to save the change
         connection.commit()
         return {"item": item, "status": NOTSTARTED}
-    except Exception as error:
+    except BaseException as error:
         print('Error: ', error)
         return None
 
@@ -41,7 +41,7 @@ def get_all_items():
         cursor.execute('select * from items')
         rows = cursor.fetchall()
         return {"count": len(rows), "items": rows}
-    except Exception as error:
+    except BaseException as error:
         logger.error('Error!', error)
         return None
 
@@ -62,10 +62,11 @@ def update_status(item, status):
         conn = sqlite3.connect(
             current_app.config['DATABASE'],
             detect_types=sqlite3.PARSE_DECLTYPES)
-        c = conn.cursor()
-        c.execute('update items set status=? where item=?', (status, item))
+        cursor = conn.cursor()
+        cursor.execute(
+            'update items set status=? where item=?', (status, item))
         conn.commit()
         return {item: status}
-    except Exception as e:
-        print('Error: ', e)
+    except BaseException as error:
+        print('Error: ', error)
         return None
