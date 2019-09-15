@@ -90,7 +90,7 @@ def create_app(test_config=None):
                         "%Y-%m-%d %H:%M:%S")
 
             return newitem
-
+        
         new_data = list(map(converttime, res_data['items']))
         response = Response(json.dumps(new_data), mimetype='application/json')
         return response

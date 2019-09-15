@@ -3,7 +3,7 @@ import sqlite3
 from flask import current_app
 import logger  # To Do: check if this logger is coded correctly
 from datetime import datetime
-
+import json
 
 NOTSTARTED = 'Not Started'
 INPROGRESS = 'In Progress'
@@ -44,18 +44,28 @@ def get_all_items():
         rows = cursor.fetchall()
         return {"count": len(rows), "items": rows}
     except BaseException as error:
-        logger.error('Error!', error)
+        print ('Error!', error)
         return None
 
 
 def update_status(title, completed_at):
     try:
+        print title, completed_at
         conn = sqlite3.connect(
             current_app.config['DATABASE'],
             detect_types=sqlite3.PARSE_DECLTYPES)
         cursor = conn.cursor()
+
+        def convertdate(date):
+            """ convert date from put request to UTC """
+            if date is not None:
+                return datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%fZ")
+            else:
+                return ""
+        newdate = convertdate(completed_at)
+
         cursor.execute(
-            'update items set completed_at=? where title=?', (datetime.now(), title))
+            'update items set completed_at=? where title=?', (newdate, title))
         conn.commit()
         return {title: completed_at}
     except BaseException as error:

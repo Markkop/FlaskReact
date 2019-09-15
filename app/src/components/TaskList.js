@@ -7,6 +7,7 @@ const TaskList = () => {
 
   const getData = async () => {
     const response = await axios("http://127.0.0.1:5000/items/all");
+    console.log(response);
     setTasks(response.data);
   };
 
