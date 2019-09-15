@@ -1,10 +1,12 @@
 import React from "react";
 
+// To Do: change backend's logic so it provides an object instead of an array
+
 const TaskCard = ({ task }) => {
   return (
     <div>
-      <p>Task:</p>
-      <p>{task[0]}</p>
+      <p>Task: {task[0]}</p>
+      <p>Status: {task[1]}</p>
     </div>
   );
 };
