@@ -1,13 +1,7 @@
 """ helper file """
 import sqlite3
-from flask import current_app
-import logger  # To Do: check if this logger is coded correctly
 from datetime import datetime
-import json
-
-NOTSTARTED = 'Not Started'
-INPROGRESS = 'In Progress'
-COMPLETED = 'Completed'
+from flask import current_app
 
 
 def add_to_list(title, description, deadline):
@@ -22,12 +16,12 @@ def add_to_list(title, description, deadline):
         cursor = connection.cursor()
 
         # Keep the initial status as Not Started
-        cursor.execute('insert into items(title, description, deadline, completed_at) values(?,?,?,?)',
-                       (title, description, deadline, ''))
+        cursor.execute('insert into items(title, description, deadline) values(?,?,?)',
+                       (title, description, deadline))
 
         # We commit to save the change
         connection.commit()
-        return {"title": title, "description": description, "deadline": deadline, "completed_at": ''}
+        return {"title": title, "description": description, "deadline": deadline}
     except BaseException as error:
         print('Error: ', error)
         return None

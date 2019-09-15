@@ -48,11 +48,15 @@ def create_app(test_config=None):
         """ add a new task item """
         # Get item from the POST body
         req_data = request.get_json()
+        print req_data
+
         title = req_data['title']
+        description = req_data['description']
+        deadline = req_data['deadline']
 
         # Add item to the list
         res_data = src.helper.add_to_list(
-            title, 'default description', '')
+            title, description, deadline)
 
         # Return error if item not added
         if res_data is None:
@@ -84,14 +88,18 @@ def create_app(test_config=None):
         def converttime(item):
             """ converts a datetime field to string to be dumped by json.dump()"""
             newitem = list(item)
+
             for value in item:
                 if isinstance(value, datetime):
                     newitem[newitem.index(value)] = value.strftime(
                         "%Y-%m-%d %H:%M:%S")
 
             return newitem
-        
-        new_data = list(map(converttime, res_data['items']))
+
+        if res_data is not None:
+            new_data = list(map(converttime, res_data['items']))
+        else:
+            new_data = res_data
         response = Response(json.dumps(new_data), mimetype='application/json')
         return response
 
