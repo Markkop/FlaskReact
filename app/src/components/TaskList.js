@@ -18,7 +18,7 @@ const TaskList = () => {
 
   // To Do: change index to a proper ID
   return (
-    <div>
+    <div className="taskList">
       {tasks &&
         tasks.map((task, index) => <TaskCard key={index} task={task} />)}
     </div>

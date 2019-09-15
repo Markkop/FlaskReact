@@ -4,7 +4,7 @@ import React from "react";
 
 const TaskCard = ({ task }) => {
   return (
-    <div>
+    <div className="taskCard">
       <p>Task: {task[0]}</p>
       <p>Status: {task[1]}</p>
     </div>
