@@ -1,7 +1,7 @@
 """ helper file """
 import sqlite3
 from flask import current_app
-import logger
+import logger  # To Do: check if this logger is coded correctly
 
 NOTSTARTED = 'Not Started'
 INPROGRESS = 'In Progress'
@@ -42,5 +42,30 @@ def get_all_items():
         rows = cursor.fetchall()
         return {"count": len(rows), "items": rows}
     except Exception as error:
-        logger.exception('Error!', error)
+        logger.error('Error!', error)
+        return None
+
+
+def update_status(item, status):
+    # Check if the passed status is a valid value
+    if (status.lower().strip() == 'not started'):
+        status = NOTSTARTED
+    elif (status.lower().strip() == 'in progress'):
+        status = INPROGRESS
+    elif (status.lower().strip() == 'completed'):
+        status = COMPLETED
+    else:
+        print("Invalid Status: " + status)
+        return None
+
+    try:
+        conn = sqlite3.connect(
+            current_app.config['DATABASE'],
+            detect_types=sqlite3.PARSE_DECLTYPES)
+        c = conn.cursor()
+        c.execute('update items set status=? where item=?', (status, item))
+        conn.commit()
+        return {item: status}
+    except Exception as e:
+        print('Error: ', e)
         return None
