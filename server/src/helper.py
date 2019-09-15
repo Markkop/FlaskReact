@@ -2,13 +2,15 @@
 import sqlite3
 from flask import current_app
 import logger  # To Do: check if this logger is coded correctly
+from datetime import datetime
+
 
 NOTSTARTED = 'Not Started'
 INPROGRESS = 'In Progress'
 COMPLETED = 'Completed'
 
 
-def add_to_list(item):
+def add_to_list(title, description, deadline):
     """ adds a item to the list """
     try:
         connection = sqlite3.connect(
@@ -20,12 +22,12 @@ def add_to_list(item):
         cursor = connection.cursor()
 
         # Keep the initial status as Not Started
-        cursor.execute('insert into items(item, status) values(?,?)',
-                       (item, NOTSTARTED))
+        cursor.execute('insert into items(title, description, deadline, completed_at) values(?,?,?,?)',
+                       (title, description, deadline, ''))
 
         # We commit to save the change
         connection.commit()
-        return {"item": item, "status": NOTSTARTED}
+        return {"title": title, "description": description, "deadline": deadline, "completed_at": ''}
     except BaseException as error:
         print('Error: ', error)
         return None
@@ -46,27 +48,16 @@ def get_all_items():
         return None
 
 
-def update_status(item, status):
-    # Check if the passed status is a valid value
-    if (status.lower().strip() == 'not started'):
-        status = NOTSTARTED
-    elif (status.lower().strip() == 'in progress'):
-        status = INPROGRESS
-    elif (status.lower().strip() == 'completed'):
-        status = COMPLETED
-    else:
-        print("Invalid Status: " + status)
-        return None
-
+def update_status(title, completed_at):
     try:
         conn = sqlite3.connect(
             current_app.config['DATABASE'],
             detect_types=sqlite3.PARSE_DECLTYPES)
         cursor = conn.cursor()
         cursor.execute(
-            'update items set status=? where item=?', (status, item))
+            'update items set complet_at=? where item=?', (datetime.now(), title))
         conn.commit()
-        return {item: status}
+        return {title: completed_at}
     except BaseException as error:
         print('Error: ', error)
         return None

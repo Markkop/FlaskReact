@@ -7,6 +7,7 @@ from flask import Flask, request, Response
 from flask_cors import CORS
 import src.helper
 from . import db
+from datetime import datetime
 
 
 def create_app(test_config=None):
@@ -47,15 +48,16 @@ def create_app(test_config=None):
         """ add a new task item """
         # Get item from the POST body
         req_data = request.get_json()
-        item = req_data['item']
+        title = req_data['title']
 
         # Add item to the list
-        res_data = src.helper.add_to_list(item)
+        res_data = src.helper.add_to_list(
+            title, 'default description', '')
 
         # Return error if item not added
         if res_data is None:
             response = Response("{'error': 'Item not added - " +
-                                item + "'}", status=400, mimetype='application/json')
+                                title + "'}", status=400, mimetype='application/json')
             return response
 
         # Return response
@@ -69,24 +71,32 @@ def create_app(test_config=None):
         # Get items from the helper
         res_data = src.helper.get_all_items()
         # Return response
-        response = Response(json.dumps(res_data), mimetype='application/json')
+
+        # Convert timestamp to string before json dumping
+        # new_data = [(data[0], data[1], data[2], data[3].strftime(
+        #     "%Y-%m-%d %H:%M:%S"), data[4])
+        #     for data in res_data['items']]
+        new_data = [(data[0], data[1], data[2], data[3], data[4])
+                    for data in res_data['items']]
+
+        response = Response(json.dumps(new_data), mimetype='application/json')
         return response
 
     @app.route('/item/update', methods=['PUT'])
     def _update_status():
-        """ updates a item """
+        """ updates an item """
         # Get item from the POST body
         req_data = request.get_json()
-        item = req_data['item']
-        status = req_data['status']
+        title = req_data['title']
+        completed_at = datetime.now()
 
         # Update item in the list
-        res_data = src.helper.update_status(item, status)
+        res_data = src.helper.update_status(title, completed_at)
 
         # Return error if the status could not be updated
         if res_data is None:
-            response = Response("{'error': 'Error updating item - '" + item +
-                                ", " + status + "}", status=400, mimetype='application/json')
+            response = Response("{'error': 'Error updating item - '" + title +
+                                ", " + completed_at + "}", status=400, mimetype='application/json')
             return response
 
         # Return response

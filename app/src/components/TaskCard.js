@@ -5,8 +5,11 @@ import React from "react";
 const TaskCard = ({ task }) => {
   return (
     <div className="taskCard">
-      <p>Task: {task[0]}</p>
-      <p>Status: {task[1]}</p>
+      <p>TaskID: {task[0]}</p>
+      <p>Title: {task[1]}</p>
+      <p>Description: {task[2]}</p>
+      <p>Deadline: {task[3]}</p>
+      <p>CompletedAt: {task[4]}</p>
     </div>
   );
 };
