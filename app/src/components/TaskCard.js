@@ -1,10 +1,10 @@
 import React from "react";
-import TaskCard from "./TaskCard";
 
-const TaskCard = task => {
+const TaskCard = ({ task }) => {
   return (
     <div>
-      <p>{task.name}</p>
+      <p>Task:</p>
+      <p>{task}</p>
     </div>
   );
 };
