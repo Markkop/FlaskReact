@@ -1,7 +1,7 @@
 """ helper file """
 import sqlite3
-import logger
 from flask import current_app
+import logger
 
 NOTSTARTED = 'Not Started'
 INPROGRESS = 'In Progress'
@@ -33,7 +33,6 @@ def add_to_list(item):
 
 def get_all_items():
     """ gets all items from the list """
-    # noinspection PyBroadException
     try:
         connection = sqlite3.connect(
             current_app.config['DATABASE'],
