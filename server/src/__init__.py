@@ -43,20 +43,20 @@ def create_app(test_config=None):
 
     db.init_app(app)
 
-    @app.route('/items/new', methods=['POST'])
-    def _add_item():
+    @app.route('/items/new', methods=['POST'], defaults={"title": "No title", "description": "No description", "deadline": "No deadline"})
+    def _add_item(title, description, deadline):
         """ add a new task item """
         # Get item from the POST body
+
         req_data = request.get_json()
         print req_data
-
-        title = req_data['title']
-        description = req_data['description']
-        deadline = req_data['deadline']
+        if req_data is not {}:
+            title = req_data['title']
+            description = req_data['description']
+            deadline = req_data['deadline']
 
         # Add item to the list
-        res_data = src.helper.add_to_list(
-            title, description, deadline)
+        res_data = src.helper.add_to_list(title, description, deadline)
 
         # Return error if item not added
         if res_data is None:

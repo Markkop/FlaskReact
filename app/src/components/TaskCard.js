@@ -23,7 +23,8 @@ const TaskCard = ({ task }) => {
   };
   const [date, setDate] = useState(convertToUTC(completedAt));
 
-  const handleClick = async () => {
+  const handleClick = async event => {
+    event.preventDefault();
     if (!done) {
       setDate(Date());
     } else {
@@ -49,7 +50,7 @@ const TaskCard = ({ task }) => {
       description={description}
       deadline={deadline}
       completedAt={date.toString()}
-      handleClick={e => handleClick(e)}
+      handleClick={handleClick}
       buttonText={done ? "Mark as undone" : "Mark as done"}
     />
   );

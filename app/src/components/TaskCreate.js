@@ -3,16 +3,39 @@ import useForm from "./useForm";
 import axios from "axios";
 import TaskCardLayout from "./TaskCardLayout";
 
-const TaskCreate = () => {
+const TaskCreate = ({ setTasks, tasks }) => {
   const createTask = async () => {
-    console.log(values);
-    const response = await axios.post("http://127.0.0.1:5000/items/new", {
-      title: values.title,
-      description: values.description,
-      deadline: values.deadline
+    let newValues = {
+      ...values
+    };
+
+    // Apply defaults
+    ["title", "description", "deadline"].forEach(field => {
+      if (!newValues[field]) {
+        newValues[field] = `no ${field}`;
+      }
     });
 
-    console.log(response);
+    // Create a new task as an array
+    const newTask = [
+      Math.random(),
+      newValues["title"],
+      newValues["description"],
+      newValues["deadline"]
+    ];
+
+    // Updates list
+    setTasks([...tasks, newTask]);
+
+    try {
+      const response = await axios.post("http://127.0.0.1:5000/items/new", {
+        ...values
+      });
+      console.log("New event creation's response", response);
+    } catch (error) {
+      setTasks([...tasks]);
+      console.log(error);
+    }
   };
 
   const { values, handleChange, handleSubmit } = useForm(createTask);

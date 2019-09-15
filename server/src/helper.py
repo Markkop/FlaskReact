@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import current_app
 
 
-def add_to_list(title, description, deadline):
+def add_to_list(title='No title', description='No description', deadline='No deadline'):
     """ adds a item to the list """
     try:
         connection = sqlite3.connect(

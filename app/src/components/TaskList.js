@@ -20,7 +20,7 @@ const TaskList = () => {
 
   return (
     <div className="taskList">
-      <TaskCreate />
+      <TaskCreate setTasks={setTasks} tasks={tasks} />
       {tasks && tasks.map(task => <TaskCard key={task[0]} task={task} />)}
     </div>
   );
