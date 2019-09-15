@@ -76,9 +76,22 @@ def create_app(test_config=None):
         # new_data = [(data[0], data[1], data[2], data[3].strftime(
         #     "%Y-%m-%d %H:%M:%S"), data[4])
         #     for data in res_data['items']]
-        new_data = [(data[0], data[1], data[2], data[3], data[4])
-                    for data in res_data['items']]
 
+        #strftime("%Y-%m-%d %H:%M:%S")
+        # new_data = [(data[0], data[1], data[2], data[3], data[4].strftime("%Y-%m-%d %H:%M:%S"))
+        #             for data in res_data['items']]
+
+        def converttime(item):
+            """ converts a datetime field to string to be dumped by json.dump()"""
+            newitem = list(item)
+            for value in item:
+                if isinstance(value, datetime):
+                    newitem[newitem.index(value)] = value.strftime(
+                        "%Y-%m-%d %H:%M:%S")
+
+            return newitem
+
+        new_data = list(map(converttime, res_data['items']))
         response = Response(json.dumps(new_data), mimetype='application/json')
         return response
 
@@ -88,7 +101,7 @@ def create_app(test_config=None):
         # Get item from the POST body
         req_data = request.get_json()
         title = req_data['title']
-        completed_at = datetime.now()
+        completed_at = req_data['completed_at']
 
         # Update item in the list
         res_data = src.helper.update_status(title, completed_at)
@@ -96,7 +109,7 @@ def create_app(test_config=None):
         # Return error if the status could not be updated
         if res_data is None:
             response = Response("{'error': 'Error updating item - '" + title +
-                                ", " + completed_at + "}", status=400, mimetype='application/json')
+                                "}", status=400, mimetype='application/json')
             return response
 
         # Return response

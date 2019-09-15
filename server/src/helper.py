@@ -55,7 +55,7 @@ def update_status(title, completed_at):
             detect_types=sqlite3.PARSE_DECLTYPES)
         cursor = conn.cursor()
         cursor.execute(
-            'update items set complet_at=? where item=?', (datetime.now(), title))
+            'update items set completed_at=? where title=?', (datetime.now(), title))
         conn.commit()
         return {title: completed_at}
     except BaseException as error:
