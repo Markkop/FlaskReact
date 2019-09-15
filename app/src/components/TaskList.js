@@ -7,7 +7,7 @@ const TaskList = () => {
 
   const getData = async () => {
     const response = await axios("http://127.0.0.1:5000/items/all");
-    setTasks(response.items);
+    setTasks(response.data.items);
   };
 
   useEffect(() => {
@@ -16,11 +16,11 @@ const TaskList = () => {
 
   console.log(tasks);
 
+  // To Do: change index to a proper ID
   return (
     <div>
-      {tasks.map(task => (
-        <TaskCard task={task} />
-      ))}
+      {tasks &&
+        tasks.map((task, index) => <TaskCard key={index} task={task} />)}
     </div>
   );
 };

@@ -4,7 +4,7 @@ const TaskCard = ({ task }) => {
   return (
     <div>
       <p>Task:</p>
-      <p>{task}</p>
+      <p>{task[0]}</p>
     </div>
   );
 };
