@@ -32,13 +32,10 @@ const TaskCard = ({ task }) => {
     }
     setDone(!done);
     try {
-      const response = await axios.put(
-        "http://flaskreact-server.herokuapp.com/item/update",
-        {
-          taskid: id,
-          completed_at: !done ? new Date() : null
-        }
-      );
+      const response = await axios.put("http://127.0.0.1:5000/item/update", {
+        taskid: id,
+        completed_at: !done ? new Date() : null
+      });
       console.log(response);
     } catch (error) {
       setDone(!done);

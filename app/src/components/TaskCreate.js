@@ -3,7 +3,7 @@ import useForm from "./useForm";
 import axios from "axios";
 import TaskCardLayout from "./TaskCardLayout";
 
-const TaskCreate = ({ setTasks, tasks }) => {
+const TaskCreate = ({ tasks, setTasks }) => {
   const createTask = async () => {
     const newid = values["id"] ? values.id : tasks && tasks.length + 1;
 

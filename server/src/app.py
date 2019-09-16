@@ -68,21 +68,19 @@ def create_app(test_config=None):
 
         return response
 
+    @app.route('/items/reset')
+    def _reset_items():
+        """a"""
+        res_data = helper.reset_items()
+        response = Response(json.dumps(res_data), mimetype='application/json')
+        return response
+
     @app.route('/items/all')
     def _get_all_items():
         """ gets all task items """
         # Get items from the helper
         res_data = helper.get_all_items()
         # Return response
-
-        # Convert timestamp to string before json dumping
-        # new_data = [(data[0], data[1], data[2], data[3].strftime(
-        #     "%Y-%m-%d %H:%M:%S"), data[4])
-        #     for data in res_data['items']]
-
-        #strftime("%Y-%m-%d %H:%M:%S")
-        # new_data = [(data[0], data[1], data[2], data[3], data[4].strftime("%Y-%m-%d %H:%M:%S"))
-        #             for data in res_data['items']]
 
         def converttime(item):
             """ converts a datetime field to string to be dumped by json.dump()"""

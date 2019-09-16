@@ -22,7 +22,7 @@ const TaskCardLayout = ({
   const isDue = deadline && new Date([...deadline.split("-")]) - new Date() < 0;
   return (
     <form onSubmit={handleClick} id="cardForm" className="mb-3 text-center">
-      <div className="taskCard card mb-4 shadow-sm">
+      <div className="taskCard card mb-4 shadow-sm fadeIn">
         <div className="card-header">
           {/* <p>TaskID: {id}</p> */}
           {/* <label htmlFor="title">Title:</label> */}

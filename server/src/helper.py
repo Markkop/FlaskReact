@@ -52,6 +52,30 @@ def get_all_items():
         return None
 
 
+def reset_items():
+    """ gets all items from the list """
+    try:
+        connection = sqlite3.connect(
+            current_app.config['DATABASE'],
+            detect_types=sqlite3.PARSE_DECLTYPES)
+        cursor = connection.cursor()
+        cursor.execute('DROP TABLE IF EXISTS "items"')
+        cursor.execute("""CREATE TABLE "items"
+                        (
+                            id INTEGER PRIMARY KEY,
+                            title TEXT NOT NULL,
+                            description TEXT NOT NULL,
+                            deadline TEXT,
+                            completed_at TIMESTAMP
+                        )
+                        """)
+        # rows = cursor.fetchall()
+        return {"message": "done"}
+    except BaseException as error:
+        print('Error!', error)
+        return None
+
+
 def update_status(taskid, completed_at):
     try:
         conn = sqlite3.connect(
