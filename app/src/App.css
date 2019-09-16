@@ -11,7 +11,6 @@ p {
 .taskList {
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
   align-items: flex-start;
   margin: auto;
   padding: 3px;
@@ -21,8 +20,8 @@ p {
 form {
   display: flex;
   margin: 30px;
-  height: 100%;
   padding: 0;
+  min-height: 400px;
 }
 .card-header {
   height: 60px;
@@ -33,6 +32,7 @@ form {
   flex-flow: column;
   width: 300px;
   padding: 20px;
+  min-height: 150px;
 }
 
 .card-footer > * {

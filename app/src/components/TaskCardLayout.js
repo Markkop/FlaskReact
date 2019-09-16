@@ -13,6 +13,11 @@ const TaskCardLayout = ({
 }) => {
   const [type, setType] = useState("text");
 
+  const convertDate = string => {
+    const dateObj = new Date(string);
+    return dateObj.toDateString();
+  };
+
   // enables isDue css class for older dates (had to split to get locale)
   const isDue = deadline && new Date([...deadline.split("-")]) - new Date() < 0;
   return (
@@ -36,8 +41,8 @@ const TaskCardLayout = ({
         <div className="card-body">
           {/* <label htmlFor="description">Description:</label> */}
           <div className="taskDescription">
-            {description && <p>{description}</p>}
-            {!description && (
+            {!isForm && <p>{description}</p>}
+            {isForm && (
               <textarea
                 className="form-control"
                 type="text"
@@ -51,12 +56,26 @@ const TaskCardLayout = ({
         </div>
         {/* <label htmlFor="deadline">Deadline:</label> */}
         <div className="card-footer text-muted">
-          {!completedAt && deadline && (
-            <p className={`${isDue && !completedAt && "isDue"} p-2`}>
-              {deadline}
-            </p>
-          )}
-          {!deadline && (
+          {!isForm &&
+            (completedAt ? (
+              <p className="p-2">
+                Completed at
+                <br />
+                {completedAt
+                  .split(" ")
+                  .splice(0, 5)
+                  .join(" ")}
+              </p>
+            ) : (
+              deadline && (
+                <p className={`${isDue && "isDue"} p-2`}>
+                  Deadline:
+                  <br />
+                  {convertDate(deadline)}
+                </p>
+              )
+            ))}
+          {isForm && (
             <input
               className="form-control"
               type={type}
@@ -67,16 +86,6 @@ const TaskCardLayout = ({
             ></input>
           )}
 
-          {completedAt && (
-            <p>
-              Completed at
-              <br />
-              {completedAt
-                .split(" ")
-                .splice(0, 5)
-                .join(" ")}
-            </p>
-          )}
           <button
             onClick={handleClick}
             className={`btn btn-lg btn-block btn${
