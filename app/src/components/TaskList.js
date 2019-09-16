@@ -22,10 +22,12 @@ const TaskList = () => {
   console.log(tasks);
 
   return (
-    <div className="taskList">
-      <TaskCreate setTasks={setTasks} tasks={tasks} />
-      {tasks && tasks.map(task => <TaskCard key={task[0]} task={task} />)}
-    </div>
+    <section>
+      <div className="taskList">
+        <TaskCreate setTasks={setTasks} tasks={tasks} />
+        {tasks && tasks.map(task => <TaskCard key={task[0]} task={task} />)}
+      </div>
+    </section>
   );
 };
 

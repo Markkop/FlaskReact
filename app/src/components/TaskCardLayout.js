@@ -15,11 +15,7 @@ const TaskCardLayout = ({
   // enables isDue css class for older dates (had to split to get locale)
   const isDue = deadline && new Date([...deadline.split("-")]) - new Date() < 0;
   return (
-    <form
-      onSubmit={handleClick}
-      id="cardForm"
-      className="taskList mb-3 text-center"
-    >
+    <form onSubmit={handleClick} id="cardForm" className="mb-3 text-center">
       <div className="taskCard card mb-4 shadow-sm">
         <div className="card-header">
           {/* <p>TaskID: {id}</p> */}

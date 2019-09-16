@@ -4,7 +4,7 @@ import TaskList from "./components/TaskList";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-light">
       <TaskList />
     </div>
   );

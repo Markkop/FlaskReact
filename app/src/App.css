@@ -1,12 +1,27 @@
+.App {
+  display: flex;
+  padding: 30px;
+  justify-content: center;
+}
+
+section {
+  justify-content: center;
+}
+
 .taskList {
   display: flex;
   flex-flow: row wrap;
-  flex-shrink: 1;
-  margin: 30px 30px;
+  justify-content: flex-start;
+  margin: auto;
+  padding: 0;
+  width: 86vw;
 }
 
-.card-deck {
+form {
   margin: 30px;
+}
+.card-header {
+  height: 60px;
 }
 
 .card-body {
@@ -20,41 +35,6 @@
   margin: 10px 0;
 }
 
-.taskContainer {
-  /* display: flex;
-  flex-flow: column;
-
-  font-size: 20px;
-  background-color: grey;
-  border: 3px solid black;
-  height: 400px;
-  width: 20vw;
-  margin: 20px;
-  padding: 5px; */
-}
-
-.taskCard {
-  /* min-height: 80%;
-  display: flex;
-  flex-flow: column;
-  color: white; */
-}
-
 .isDue {
-  color: pink;
-}
-
-.formPair {
-  /* margin: 10px 0;
-  height: 15%;
-  width: 19vw; */
-}
-
-button {
-  /* height: 100%; */
-}
-
-.formPair > * {
-  /* width: 100%;
-  margin: 0; */
+  color: red;
 }
