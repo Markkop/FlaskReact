@@ -5,6 +5,7 @@ const useForm = callback => {
 
   const handleSubmit = event => {
     if (event) event.preventDefault();
+    document.getElementById("cardForm").reset();
     callback();
   };
 
@@ -19,7 +20,8 @@ const useForm = callback => {
   return {
     handleChange,
     handleSubmit,
-    values
+    values,
+    setValues
   };
 };
 

@@ -55,7 +55,7 @@ const TaskCard = ({ task }) => {
       deadline={deadline}
       completedAt={date.toString()}
       handleClick={handleClick}
-      buttonText={done ? "Mark as undone" : "Mark as done"}
+      buttonText={done ? "Task done ✓" : "Mark as done"}
     />
   );
 };

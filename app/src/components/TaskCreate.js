@@ -5,6 +5,7 @@ import TaskCardLayout from "./TaskCardLayout";
 
 const TaskCreate = ({ setTasks, tasks }) => {
   const createTask = async () => {
+    setValues({});
     let newValues = {
       ...values
     };
@@ -42,7 +43,7 @@ const TaskCreate = ({ setTasks, tasks }) => {
     }
   };
 
-  const { values, handleChange, handleSubmit } = useForm(createTask);
+  const { values, setValues, handleChange, handleSubmit } = useForm(createTask);
 
   return (
     <TaskCardLayout
