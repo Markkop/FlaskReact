@@ -8,7 +8,7 @@ const TaskList = () => {
 
   const getData = async () => {
     const response = await axios(
-      "http://flaskreact-server.herokuapp.com/items/all"
+      "https://flaskreact-server.herokuapp.com/items/all"
     );
     console.log(response);
     setTasks(response.data);
