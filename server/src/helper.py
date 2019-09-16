@@ -38,13 +38,12 @@ def get_all_items():
         rows = cursor.fetchall()
         return {"count": len(rows), "items": rows}
     except BaseException as error:
-        print ('Error!', error)
+        print('Error!', error)
         return None
 
 
 def update_status(taskid, completed_at):
     try:
-        print taskid, completed_at
         conn = sqlite3.connect(
             current_app.config['DATABASE'],
             detect_types=sqlite3.PARSE_DECLTYPES)

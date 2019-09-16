@@ -14,6 +14,8 @@ You may run `export FLASK_DEBUG=1` to enable auto reloading\
 To initialize the database as configured in `schema.sql`, run `flask init-db`\
 Start flask by running `flask run` or `python -m flask run` in case of virtualenv
 
+To Do: change pip to pipenv
+
 ## References
 
 - [Building a Todo App with Flask in Python](https://stackabuse.com/building-a-todo-app-with-flask-in-python/)

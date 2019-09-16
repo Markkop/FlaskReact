@@ -29,7 +29,7 @@ def close_db(error=None):
     if database is not None:
         database.close()
     if error is not None:
-        print error
+        print(error)
 
 
 def init_db():

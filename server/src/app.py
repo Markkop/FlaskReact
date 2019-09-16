@@ -5,9 +5,9 @@ import os
 import json
 from flask import Flask, request, Response
 from flask_cors import CORS
-import src.helper
-from . import db
-from datetime import datetime
+import helper
+import db
+import datetime
 
 
 def create_app(test_config=None):
@@ -66,7 +66,7 @@ def create_app(test_config=None):
             deadline = "No deadline"
 
         # Add item to the list
-        res_data = src.helper.add_to_list(title, description, deadline)
+        res_data = helper.add_to_list(title, description, deadline)
 
         # Return error if item not added
         if res_data is None:
@@ -83,7 +83,7 @@ def create_app(test_config=None):
     def _get_all_items():
         """ gets all task items """
         # Get items from the helper
-        res_data = src.helper.get_all_items()
+        res_data = helper.get_all_items()
         # Return response
 
         # Convert timestamp to string before json dumping
@@ -122,7 +122,7 @@ def create_app(test_config=None):
         completed_at = req_data['completed_at']
 
         # Update item in the list
-        res_data = src.helper.update_status(taskid, completed_at)
+        res_data = helper.update_status(taskid, completed_at)
 
         # Return error if the status could not be updated
         if res_data is None:
@@ -136,3 +136,6 @@ def create_app(test_config=None):
         return response
 
     return app
+
+
+app = create_app()
