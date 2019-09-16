@@ -17,13 +17,13 @@ const TaskCreate = ({ setTasks, tasks }) => {
     });
 
     // Create a new task as an array
+    const newid = tasks.length + 1;
     const newTask = [
-      Math.random(),
+      newid,
       newValues["title"],
       newValues["description"],
       newValues["deadline"]
     ];
-
     // Updates list
     setTasks([newTask, ...tasks]);
 

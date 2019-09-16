@@ -33,9 +33,10 @@ const TaskCard = ({ task }) => {
     setDone(!done);
     try {
       const response = await axios.put("http://127.0.0.1:5000/item/update", {
-        title: title,
+        taskid: id,
         completed_at: !done ? new Date() : null
       });
+      console.log(response);
     } catch (error) {
       setDone(!done);
       setDate("Please try again later");

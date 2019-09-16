@@ -118,15 +118,15 @@ def create_app(test_config=None):
         """ updates an item """
         # Get item from the POST body
         req_data = request.get_json()
-        title = req_data['title']
+        taskid = req_data['taskid']
         completed_at = req_data['completed_at']
 
         # Update item in the list
-        res_data = src.helper.update_status(title, completed_at)
+        res_data = src.helper.update_status(taskid, completed_at)
 
         # Return error if the status could not be updated
         if res_data is None:
-            response = Response("{'error': 'Error updating item - '" + title +
+            response = Response("{'error': 'Error updating item - '" + taskid +
                                 "}", status=400, mimetype='application/json')
             return response
 

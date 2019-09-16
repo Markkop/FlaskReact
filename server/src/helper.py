@@ -42,9 +42,9 @@ def get_all_items():
         return None
 
 
-def update_status(title, completed_at):
+def update_status(taskid, completed_at):
     try:
-        print title, completed_at
+        print taskid, completed_at
         conn = sqlite3.connect(
             current_app.config['DATABASE'],
             detect_types=sqlite3.PARSE_DECLTYPES)
@@ -59,9 +59,9 @@ def update_status(title, completed_at):
         newdate = convertdate(completed_at)
 
         cursor.execute(
-            'update items set completed_at=? where title=?', (newdate, title))
+            'update items set completed_at=? where id=?', (newdate, taskid))
         conn.commit()
-        return {title: completed_at}
+        return {taskid: completed_at}
     except BaseException as error:
         print('Error: ', error)
         return None
