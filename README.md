@@ -16,6 +16,19 @@ Start flask by running `flask run` or `python -m flask run` in case of virtualen
 
 To Do: change pip to pipenv
 
+### To deploy
+
+`heroku create`\
+`git init`\
+`git remote add heroku <git>`
+`git add .`\
+`git commit -m "updating deploy"`\
+`git push heroku master`\
+
+(pipenv install ?)\
+`pipenv lock`\
+Procfile `web: flask init-db & gunicorn app:app`
+
 ## References
 
 - [Building a Todo App with Flask in Python](https://stackabuse.com/building-a-todo-app-with-flask-in-python/)

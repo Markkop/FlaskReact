@@ -17,7 +17,7 @@ const TaskCreate = ({ setTasks, tasks }) => {
     });
 
     // Create a new task as an array
-    const newid = tasks.length + 1;
+    const newid = tasks && tasks.length + 1;
     const newTask = [
       newid,
       newValues["title"],
@@ -25,15 +25,18 @@ const TaskCreate = ({ setTasks, tasks }) => {
       newValues["deadline"]
     ];
     // Updates list
-    setTasks([newTask, ...tasks]);
+    tasks && setTasks([newTask, ...tasks]);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/items/new", {
-        ...values
-      });
+      const response = await axios.post(
+        "http://flaskreact-server.herokuapp.com/items/new",
+        {
+          ...values
+        }
+      );
       console.log("New event creation's response", response);
     } catch (error) {
-      setTasks([...tasks]);
+      tasks && setTasks([...tasks]);
       console.log(error);
     }
   };
