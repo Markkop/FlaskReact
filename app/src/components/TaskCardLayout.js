@@ -33,21 +33,26 @@ const TaskCardLayout = ({
         </div>
         <div className="card-body">
           {/* <label htmlFor="description">Description:</label> */}
-          {description && <p>{description}</p>}
-          {!description && (
-            <input
-              className="form-control"
-              type="text"
-              id="description"
-              onChange={handleChange}
-              placeholder="description"
-            ></input>
-          )}
-
-          {/* <label htmlFor="deadline">Deadline:</label> */}
-
+          <div className="taskDescription">
+            {description && <p>{description}</p>}
+            {!description && (
+              <textarea
+                className="form-control"
+                type="text"
+                id="description"
+                onChange={handleChange}
+                placeholder="description"
+                rows="3"
+              ></textarea>
+            )}
+          </div>
+        </div>
+        {/* <label htmlFor="deadline">Deadline:</label> */}
+        <div className="card-footer text-muted">
           {!completedAt && deadline && (
-            <p className={`${isDue && !completedAt && "isDue"}`}>{deadline}</p>
+            <p className={`${isDue && !completedAt && "isDue"} p-2`}>
+              {deadline}
+            </p>
           )}
           {!deadline && (
             <input
@@ -62,7 +67,7 @@ const TaskCardLayout = ({
 
           {completedAt && (
             <p>
-              Completed at:
+              Completed at
               <br />
               {completedAt
                 .split(" ")
@@ -70,15 +75,15 @@ const TaskCardLayout = ({
                 .join(" ")}
             </p>
           )}
+          <button
+            onClick={handleClick}
+            className={`btn btn-lg btn-block btn${
+              completedAt ? "-outline" : ""
+            }-primary`}
+          >
+            {buttonText}{" "}
+          </button>
         </div>
-        <button
-          onClick={handleClick}
-          className={`btn btn-lg btn-block btn${
-            completedAt ? "-outline" : ""
-          }-primary`}
-        >
-          {buttonText}{" "}
-        </button>
       </div>
     </form>
   );

@@ -4,21 +4,25 @@
   justify-content: center;
 }
 
-section {
-  justify-content: center;
+p {
+  padding: 5px;
 }
 
 .taskList {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  align-items: flex-start;
   margin: auto;
-  padding: 0;
+  padding: 3px;
   width: 86vw;
 }
 
 form {
+  display: flex;
   margin: 30px;
+  height: 100%;
+  padding: 0;
 }
 .card-header {
   height: 60px;
@@ -27,14 +31,22 @@ form {
 .card-body {
   display: flex;
   flex-flow: column;
-  min-height: 200px;
-  min-width: 300px;
+  width: 300px;
+  padding: 20px;
 }
 
-.card-body > * {
+.card-footer > * {
   margin: 10px 0;
 }
 
+.taskDescription {
+  height: 6em;
+  height: auto;
+}
+
+.card-body > * {
+  margin: 5px 0;
+}
 .isDue {
   color: red;
 }
