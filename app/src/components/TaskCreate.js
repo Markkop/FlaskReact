@@ -29,8 +29,8 @@ const TaskCreate = ({ setTasks, tasks }) => {
 
     try {
       const response = await axios.post(
-        "https://flaskreact-server.herokuapp.com/items/new",
-        // "http://"
+        // "https://flaskreact-server.herokuapp.com/items/new",
+        "http://127.0.0.1:5000/items/new",
         {
           ...values
         }
