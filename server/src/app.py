@@ -3,11 +3,11 @@
 
 import os
 import json
-from flask import Flask, request, Response
+from flask import Flask, request, Response, current_app
 from flask_cors import CORS
 import helper
 import db
-import datetime
+from datetime import datetime
 
 
 def create_app(test_config=None):
