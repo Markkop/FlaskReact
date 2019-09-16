@@ -7,7 +7,7 @@ import TaskCardLayout from "./TaskCardLayout";
 
 const TaskCard = ({ task }) => {
   const id = task[0];
-  const title = task[1];
+  const title = task[1] ? task[1] : `My task #${id}`;
   const description = task[2];
   const deadline = task[3];
   const completedAt = task[4];

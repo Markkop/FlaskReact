@@ -8,7 +8,8 @@ const TaskCardLayout = ({
   completedAt,
   handleClick,
   buttonText,
-  handleChange
+  handleChange,
+  isForm
 }) => {
   const [type, setType] = useState("text");
 
@@ -20,8 +21,9 @@ const TaskCardLayout = ({
         <div className="card-header">
           {/* <p>TaskID: {id}</p> */}
           {/* <label htmlFor="title">Title:</label> */}
-          {title && <h4 className="my-0">{title}</h4>}
-          {!title && (
+
+          {!isForm && <h4 className="my-0">{title}</h4>}
+          {isForm && (
             <input
               className="form-control"
               type="text"

@@ -4,8 +4,9 @@ from datetime import datetime
 from flask import current_app
 
 
-def add_to_list(title='No title', description='No description', deadline='No deadline'):
+def add_to_list(title="", description='', deadline=''):
     """ adds a item to the list """
+
     try:
         connection = sqlite3.connect(
             current_app.config['DATABASE'],
@@ -15,12 +16,21 @@ def add_to_list(title='No title', description='No description', deadline='No dea
         # object to execute queries
         cursor = connection.cursor()
 
+        # print(title)
+        # # Get task id
+        # if 'title' is None:
+        #     print('hoia')
+        #     cursor.execute('select * from items order by id desc')
+        #     taskid = cursor.lastrowid
+        #     title = "My task #sd"+taskid
+
         # Keep the initial status as Not Started
         cursor.execute('insert into items(title, description, deadline) values(?,?,?)',
                        (title, description, deadline))
 
         # We commit to save the change
         connection.commit()
+
         return {"title": title, "description": description, "deadline": deadline}
     except BaseException as error:
         print('Error: ', error)
@@ -34,7 +44,7 @@ def get_all_items():
             current_app.config['DATABASE'],
             detect_types=sqlite3.PARSE_DECLTYPES)
         cursor = connection.cursor()
-        cursor.execute('select * from items')
+        cursor.execute('select * from items order by id desc')
         rows = cursor.fetchall()
         return {"count": len(rows), "items": rows}
     except BaseException as error:

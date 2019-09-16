@@ -50,21 +50,9 @@ def create_app(test_config=None):
         # Get item from the POST body
         req_data = request.get_json()
 
-        # Apply defaults
-        if 'title' in req_data:
-            title = req_data['title']
-        else:
-            title = "No title"
-
-        if 'description' in req_data:
-            description = req_data['description']
-        else:
-            description = "No description"
-
-        if 'deadline' in req_data:
-            deadline = req_data['deadline']
-        else:
-            deadline = "No deadline"
+        title = req_data["title"]
+        description = req_data["description"]
+        deadline = req_data["deadline"]
 
         # Add item to the list
         res_data = helper.add_to_list(title, description, deadline)

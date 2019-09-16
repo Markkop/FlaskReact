@@ -5,20 +5,16 @@ import TaskCardLayout from "./TaskCardLayout";
 
 const TaskCreate = ({ setTasks, tasks }) => {
   const createTask = async () => {
-    setValues({});
+    const newid = values["id"] ? values.id : tasks && tasks.length + 1;
+
     let newValues = {
-      ...values
+      id: newid,
+      title: values["title"] ? values.title : `My task #${newid}`,
+      description: values["description"] ? values.description : "",
+      deadline: values["deadline"] ? values.deadline : ""
     };
 
-    // Apply defaults
-    ["title", "description", "deadline"].forEach(field => {
-      if (!newValues[field]) {
-        newValues[field] = `no ${field}`;
-      }
-    });
-
     // Create a new task as an array
-    const newid = tasks && tasks.length + 1;
     const newTask = [
       newid,
       newValues["title"],
@@ -27,13 +23,13 @@ const TaskCreate = ({ setTasks, tasks }) => {
     ];
     // Updates list
     tasks && setTasks([newTask, ...tasks]);
-
+    setValues({});
     try {
       const response = await axios.post(
         // "https://flaskreact-server.herokuapp.com/items/new",
         "http://127.0.0.1:5000/items/new",
         {
-          ...values
+          ...newValues
         }
       );
       console.log("New event creation's response", response);
@@ -50,6 +46,7 @@ const TaskCreate = ({ setTasks, tasks }) => {
       handleClick={handleSubmit}
       handleChange={handleChange}
       buttonText={"Create new task"}
+      isForm={true}
     />
   );
 };
