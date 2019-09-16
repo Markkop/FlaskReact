@@ -1,9 +1,9 @@
 .taskList {
   display: flex;
-  flex-flow: row;
-  justify-items: center;
-  max-width: 90%;
-  margin: 30px auto;
+  flex-flow: row wrap;
+  flex-shrink: 1;
+  justify-content: center;
+  margin: 30px 30px;
 }
 
 .taskContainer {

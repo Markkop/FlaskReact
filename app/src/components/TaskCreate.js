@@ -25,7 +25,7 @@ const TaskCreate = ({ setTasks, tasks }) => {
     ];
 
     // Updates list
-    setTasks([...tasks, newTask]);
+    setTasks([newTask, ...tasks]);
 
     try {
       const response = await axios.post("http://127.0.0.1:5000/items/new", {
