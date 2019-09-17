@@ -19,11 +19,30 @@ const TaskCardLayout = ({
   };
 
   // enables isDue css class for older dates (had to split to get locale)
-  const isDue = deadline && new Date([...deadline.split("-")]) - new Date() < 0;
+
+  let isDue = false;
+  if (deadline && !completedAt) {
+    isDue = deadline && new Date([...deadline.split("-")]) - new Date() < 0;
+  } else {
+    isDue = false;
+  }
+
+  const checkStatus = (isDue, completedAt) => {
+    if (completedAt) {
+      return "isComplete";
+    }
+
+    if (isDue) {
+      return "isDue";
+    }
+
+    return "isNone";
+  };
+
   return (
     <form onSubmit={handleClick} id="cardForm" className="mb-3 text-center">
-      <div className="taskCard card mb-4 shadow-sm fadeIn">
-        <div className="card-header">
+      <div className={`taskCard card mb-4 shadow-sm fadeIn`}>
+        <div className={`${checkStatus(isDue, completedAt)} card-header `}>
           {/* <p>TaskID: {id}</p> */}
           {/* <label htmlFor="title">Title:</label> */}
 
@@ -55,7 +74,12 @@ const TaskCardLayout = ({
           </div>
         </div>
         {/* <label htmlFor="deadline">Deadline:</label> */}
-        <div className="card-footer text-muted">
+        <div
+          className={`${checkStatus(
+            isDue,
+            completedAt
+          )} card-footer text-muted`}
+        >
           {!isForm &&
             (completedAt ? (
               <p className="p-2">
@@ -68,7 +92,7 @@ const TaskCardLayout = ({
               </p>
             ) : (
               deadline && (
-                <p className={`${isDue && "isDue"} p-2`}>
+                <p className={`p-2`}>
                   Deadline:
                   <br />
                   {convertDate(deadline)}

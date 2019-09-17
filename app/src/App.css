@@ -2,6 +2,9 @@
   display: flex;
   padding: 30px;
   justify-content: center;
+  --dueColor: rgba(255, 10, 0, 0.1);
+  --completeColor: rgba(0, 255, 0, 0.1);
+  --defaultColor: rgba(248, 249, 250, 1);
 }
 
 .helperButton {
@@ -30,6 +33,7 @@ form {
   padding: 0;
   min-height: 400px;
 }
+
 .card-header {
   height: 60px;
 }
@@ -54,18 +58,6 @@ form {
 .card-body > * {
   margin: 5px 0;
 }
-.isDue {
-  color: red;
-}
-
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 
 @keyframes fadeIn {
   from {
@@ -77,11 +69,53 @@ form {
   }
 }
 
-.fadeIn {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
+@keyframes fadeRedColor {
+  from {
+    background-color: none;
+  }
+
+  to {
+    background-color: var(--dueColor);
+  }
+}
+@keyframes fadeGreenColor {
+  from {
+    background-color: none;
+  }
+
+  to {
+    background-color: var(--completeColor);
+  }
+}
+@keyframes fadeToDefaulColor {
+  from {
+    background-color: none;
+  }
+
+  to {
+    background-color: var(--defaultColor);
+  }
+}
+
+.isDue {
+  animation-duration: 2s;
   animation-fill-mode: both;
-  -webkit-animation-name: fadeIn;
+  animation-name: fadeRedColor;
+}
+.isComplete {
+  animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-name: fadeGreenColor;
+}
+
+.isNone {
+  animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-name: fadeToDefaulColor;
+}
+
+.fadeIn {
+  animation-duration: 1s;
+  animation-fill-mode: both;
   animation-name: fadeIn;
 }
