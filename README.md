@@ -1,3 +1,5 @@
+![gif demo](/demo.gif)
+
 # FlaskReact
 
 A To Do app made in React (JavaScript) and Flask (Python)\
@@ -37,8 +39,11 @@ git commit -m "updating deploy"
 git push heroku master
 ```
 
-
 ## References
 
 - [Building a Todo App with Flask in Python](https://stackabuse.com/building-a-todo-app-with-flask-in-python/)
 - [Flask's Tutorial](https://flask.palletsprojects.com/en/1.0.x/tutorial/)
+
+## v1 gif
+
+![v1 gif](v1.gif)
