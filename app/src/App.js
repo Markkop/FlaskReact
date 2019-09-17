@@ -9,8 +9,8 @@ function App() {
 
   const getData = async () => {
     const response = await axios(
-      // "https://flaskreact-server.herokuapp.com/items/all"
-      "http://127.0.0.1:5000/items/all"
+      "https://flaskreact-server.herokuapp.com/items/all"
+      // "http://127.0.0.1:5000/items/all"
     );
 
     console.log(response);

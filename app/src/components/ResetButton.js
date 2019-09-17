@@ -6,7 +6,10 @@ const ResetButton = ({ tasks, setTasks }) => {
     setTasks([]);
 
     try {
-      const response = await axios("http://127.0.0.1:5000/items/reset");
+      const response = await axios(
+        //   "http://127.0.0.1:5000/items/reset"
+        "https://flaskreact-server.herokuapp.com/items/reset"
+      );
 
       console.log(response);
       if (response["message"] === "done") {
