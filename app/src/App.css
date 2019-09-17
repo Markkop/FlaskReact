@@ -20,9 +20,10 @@ p {
 
 .taskList {
   display: flex;
+
   flex-flow: row wrap;
   align-items: flex-start;
-  margin: auto;
+
   padding: 3px;
   width: 86vw;
 }
@@ -53,6 +54,12 @@ form {
 .taskDescription {
   height: 6em;
   height: auto;
+}
+
+@media screen and (max-width: 800px) {
+  section > * {
+    justify-content: center;
+  }
 }
 
 .card-body > * {
