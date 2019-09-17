@@ -3,7 +3,8 @@
 # FlaskReact
 
 A To Do app made in React (JavaScript) and Flask (Python)\
-- https://flaskreact.herokuapp.com/ 
+
+- https://flaskreact.herokuapp.com/
 - https://flaskreact-server.herokuapp.com/hello
 
 ## Commands
@@ -11,15 +12,18 @@ A To Do app made in React (JavaScript) and Flask (Python)\
 ### App
 
 Inside `app` folder:
+
 ```
 yarn
 yarn start
 ```
+
 Make sure to change api's url to localhost when developing
 
 ### Server
 
-Inside `server` folder:
+Inside `server/src` folder:
+
 ```
 pipenv install
 export FLASK_APP=server/src
@@ -30,7 +34,9 @@ flask run
 ```
 
 ### To deploy
+
 ```
+heroku login
 heroku create
 git init
 git remote add heroku <git>
