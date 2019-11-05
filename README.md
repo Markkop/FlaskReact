@@ -2,7 +2,7 @@
 
 # FlaskReact
 
-A To Do app made in React (JavaScript) and Flask (Python)\
+A To Do app made in React (JavaScript) and Flask (Python)
 
 - https://flaskreact.herokuapp.com/
 - https://flaskreact-server.herokuapp.com/hello
