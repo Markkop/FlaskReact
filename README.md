@@ -1,19 +1,26 @@
-![gif demo](/demo.gif)
+# :calendar: FlaskReact
 
-# FlaskReact
+![repo status](https://img.shields.io/badge/repo%20status-inactive-inactive)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9015f4052fca41f5a71b6e7745602a7d)](https://www.codacy.com/manual/Markkop/FlaskReact?utm_source=github.com&utm_medium=referral&utm_content=Markkop/FlaskReact&utm_campaign=Badge_Grade)
+[![https://img.shields.io/badge/made%20with-react-blue](https://img.shields.io/badge/made%20with-react-blue)](https://reactjs.org/)
+![](https://img.shields.io/badge/made_with-python-blue)
 
 A To Do app made in React (JavaScript) and Flask (Python)
 
-- https://flaskreact.herokuapp.com/
-- https://flaskreact-server.herokuapp.com/hello
+## How it works
 
-## Commands
+![gif demo](/demo.gif)
+
+- Demo link: <https://flaskreact.herokuapp.com/>
+- Api link: <https://flaskreact-server.herokuapp.com/hello>
+
+## How to develop
 
 ### App
 
 Inside `app` folder:
 
-```
+```bash
 yarn
 yarn start
 ```
@@ -24,7 +31,7 @@ Make sure to change api's url to localhost when developing
 
 Inside `server/src` folder:
 
-```
+```bash
 pipenv install
 export FLASK_APP=server/src
 export FLASK_ENV=development
@@ -33,15 +40,15 @@ flask init-db
 flask run
 ```
 
-### To deploy
+## How to deploy via Heroku
 
-```
+```bash
 heroku login
 heroku create
 git init
 git remote add heroku <git>
 git add .
-git commit -m "updating deploy"
+git commit -m "deploy"
 git push heroku master
 ```
 

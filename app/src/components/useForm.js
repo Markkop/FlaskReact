@@ -1,28 +1,28 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 const useForm = callback => {
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({})
 
   const handleSubmit = event => {
-    if (event) event.preventDefault();
-    document.getElementById("cardForm").reset();
-    callback();
-  };
+    if (event) event.preventDefault()
+    document.getElementById('cardForm').reset()
+    callback()
+  }
 
   const handleChange = event => {
-    event.persist();
+    event.persist()
     setValues(values => ({
       ...values,
-      [event.target.id]: event.target.value
-    }));
-  };
+      [event.target.id]: event.target.value,
+    }))
+  }
 
   return {
     handleChange,
     handleSubmit,
     values,
-    setValues
-  };
-};
+    setValues,
+  }
+}
 
-export default useForm;
+export default useForm

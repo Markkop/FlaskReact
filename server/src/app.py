@@ -4,7 +4,7 @@
 
 import os
 import json
-from flask import Flask, request, Response, current_app
+from flask import Flask, request, Response
 from flask_cors import CORS
 import helper
 import db
@@ -12,7 +12,7 @@ from datetime import datetime
 
 
 def create_app(test_config=None):
-    """ create server's app """
+    """ Create server's app """
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
@@ -39,14 +39,14 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/hello')
     def _hello():
-        """ returns a Hello World String """
+        """ Returns a Hello World String """
         return 'Hello, World!'
 
     db.init_app(app)
 
     @app.route('/items/new', methods=['POST'])
     def _add_item():
-        """ add a new task item """
+        """ Add a new task item """
         # Get item from the POST body
         req_data = request.get_json()
 
@@ -70,20 +70,20 @@ def create_app(test_config=None):
 
     @app.route('/items/reset')
     def _reset_items():
-        """a"""
+        """ Reset items """
         res_data = helper.reset_items()
         response = Response(json.dumps(res_data), mimetype='application/json')
         return response
 
     @app.route('/items/all')
     def _get_all_items():
-        """ gets all task items """
+        """ Gets all task items """
         # Get items from the helper
         res_data = helper.get_all_items()
         # Return response
 
         def converttime(item):
-            """ converts a datetime field to string to be dumped by json.dump()"""
+            """ Converts a datetime field to string to be dumped by json.dump()"""
             newitem = list(item)
 
             for value in item:
@@ -102,7 +102,7 @@ def create_app(test_config=None):
 
     @app.route('/item/update', methods=['PUT'])
     def _update_status():
-        """ updates an item """
+        """ Updates an item """
         # Get item from the POST body
         req_data = request.get_json()
         taskid = req_data['taskid']
